@@ -39,6 +39,9 @@ class Repository:
             else:
                 sfile.seek(0)
                 for lines in sfile:
+                    fields = lines.strip().split('\t')
+                    if len(fields) != 3:
+                        raise ValueError('Number of fields on line not expected')
                     studentid, studentname, studentmajor = lines.strip().split('\t')
                     self.studentdict[studentid] = Student(studentid,studentname,studentmajor)
 
@@ -55,6 +58,9 @@ class Repository:
             else:
                 ifile.seek(0)
                 for lines in ifile:
+                    fields = lines.strip().split('\t')
+                    if len(fields) != 3:
+                        raise ValueError('Number of fields on line not expected')
                     instructorid,instructorname,instructordept = lines.strip().split('\t')
                     self.instructordict[instructorid] = Instructor(instructorid,instructorname,instructordept)
 
@@ -71,6 +77,9 @@ class Repository:
             else:
                 gfile.seek(0)
                 for lines in gfile:
+                    fields = lines.strip().split('\t')
+                    if len(fields) != 4:
+                        raise ValueError('Number of fields on line not expected')
                     studentid,studentcourse, studentgrade,instructorid = lines.strip().split('\t')
                     if studentid in self.studentdict:
                         s = self.studentdict[studentid]
